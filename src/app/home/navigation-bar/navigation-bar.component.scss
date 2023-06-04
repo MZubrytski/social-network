@@ -1,0 +1,22 @@
+.navigation {
+  padding: 20px;
+  grid-area: navigation;
+  background-color: rgb(173, 213, 170);
+}
+
+
+.link {
+  color: #dc3545;
+  cursor: pointer;
+  text-decoration: none;
+
+  &:hover {
+    color: #666;
+  }
+}
+
+.active {
+  color: #333333;
+  font-weight: bold;
+  cursor: default;
+}
