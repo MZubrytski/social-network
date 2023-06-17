@@ -1,0 +1,9 @@
+<div class="paginator">
+  <button *ngIf="portionNumber > 1" (click)="decreasePortionNumber()">PREV</button>
+  <ng-container *ngFor="let page of filteredPages; let i = index">
+    <span [ngClass]="{'selected-page': currentPage === page}" class="page-number" (click)="onPageChanged(page)">
+      {{page}}
+    </span>
+  </ng-container>
+  <button *ngIf="portionCount > portionNumber" (click)="increasePortionNumber()">NEXT</button>
+</div>

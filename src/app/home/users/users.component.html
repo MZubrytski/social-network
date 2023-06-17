@@ -1,0 +1,30 @@
+<div>
+  <app-paginator
+    [totalItemsCount]="totalUsersCount$ | async"
+    [currentPage]="currentPage$ | async"
+    [pageSize]="pageSize$ | async"
+    (changePage)="onPageChanged($event)"
+  ></app-paginator>
+  <div *ngFor="let user of users">
+    <span>
+      <div>
+        <a [routerLink]="['/profile', user.id]">
+          <img [src]="user.photos.small !== null ?
+           user.photos.small :
+           'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAJZ-hjST1k8veVbSVVADwCJQXvYjyjgxypQ&usqp=CAU'"
+           class="user-photo" />
+        </a>
+      </div>
+      <div>
+        <button *ngIf="user.followed" (click)="unfollow(user.id)">Unfollow</button>
+        <button *ngIf="!user.followed" (click)="follow(user.id)">Follow</button>
+      </div>
+    </span>
+    <span>
+      <span>
+        <div>{{user.name}}</div>
+        <div>{{user.status}}</div>
+      </span>
+    </span>
+  </div>
+</div>

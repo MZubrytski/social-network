@@ -2,12 +2,14 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MainLayoutComponent } from './main-layout/main-layout.component';
 import { HeaderComponent } from './header/header.component';
+import { PaginatorComponent } from './paginator/paginator.component';
 
 
 @NgModule({
   declarations: [
     MainLayoutComponent,
-    HeaderComponent
+    HeaderComponent,
+    PaginatorComponent
   ],
   imports: [
     CommonModule
@@ -15,6 +17,7 @@ import { HeaderComponent } from './header/header.component';
   exports: [
     MainLayoutComponent,
     HeaderComponent,
+    PaginatorComponent
   ]
 
 })

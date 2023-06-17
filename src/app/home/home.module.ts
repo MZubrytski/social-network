@@ -8,6 +8,8 @@ import { ProfileComponent } from './profile/profile.component';
 import { RouterModule } from '@angular/router';
 import { MyPostsComponent } from './profile/my-posts/my-posts.component';
 import { DialogsComponent } from './dialogs/dialogs.component';
+import { ProfileInfoComponent } from './profile/profile-info/profile-info.component';
+import { UsersComponent } from './users/users.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +17,9 @@ import { DialogsComponent } from './dialogs/dialogs.component';
     NavigationBarComponent,
     ProfileComponent,
     MyPostsComponent,
-    DialogsComponent
+    DialogsComponent,
+    ProfileInfoComponent,
+    UsersComponent
   ],
   imports: [
     CommonModule,
