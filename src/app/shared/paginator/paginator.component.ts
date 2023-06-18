@@ -20,7 +20,7 @@ export class PaginatorComponent implements OnChanges {
 
   ngOnChanges(changes: SimpleChanges) {
     if(changes['totalItemsCount']) {
-      this.pagesCount = Math.ceil(this.totalItemsCount / 5)
+      this.pagesCount = Math.ceil(this.totalItemsCount / this.pageSize)
       this.portionCount  = Math.ceil(this.pagesCount / this.portionSize);
       this.pages = this.getPages();
       this.filteredPages = this.getFilteredPages();

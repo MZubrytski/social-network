@@ -1,1 +1,6 @@
-<router-outlet></router-outlet>
+<ng-container *ngIf="isAuthFetch$ | async; else loaderTemplate">
+  <router-outlet></router-outlet>
+</ng-container>
+<ng-template #loaderTemplate>
+  <app-loader></app-loader>
+</ng-template>

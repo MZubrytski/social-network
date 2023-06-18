@@ -1,45 +1,32 @@
-import { Component, OnInit } from '@angular/core';
-import { Store, select } from '@ngrx/store';
+import { Component, Input, OnInit } from '@angular/core';
 import { User } from 'src/app/shared/models/User';
-import { follow, setUsers, unfollow } from 'src/app/store/features/users/actions/users.actions';
-import { getCurrentPage, getCurrentUsers, getPageSize, getTotalUsersCount } from 'src/app/store/features/users/selectors/user.selector';
-import { Observable, of } from 'rxjs';
+import { UsersComponentStore } from './users-store';
 
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.scss']
 })
-export class UsersComponent implements OnInit {
-    constructor(private store: Store) {}
-    users: User[] = [];
-    pageSize = 5;
-    totalUsersCount$: Observable<number> = of(1);
-    currentPage$: Observable<number> = of(1);
-    pageSize$: Observable<number> = of(1);
+export class UsersComponent {
+    @Input() users!: User[];
+    @Input() totalUsersCount!: number;
+    @Input() currentPage!: number;
+    @Input() pageSize!: number;
+    @Input() followingInProgress!: boolean;
+    @Input() isLoading!: boolean;
+
+    constructor(private usersComponentStore: UsersComponentStore) {}
 
     unfollow(userId: number) {
-      this.store.dispatch(unfollow({userId}))
+      this.usersComponentStore.unfollow(userId);
     }
 
     follow(userId: number) {
-      this.store.dispatch(follow({userId}))
+      this.usersComponentStore.follow(userId);
     }
 
-    onPageChanged(paginatorData: {pageNumber: number, pageSize: number}) {
+    onPageChanged(paginatorData: {pageNumber: number, pageSize: number}): void {
       const {pageNumber, pageSize}  = paginatorData
-      this.store.dispatch(setUsers({pageNumber, pageSize}))
+      this.usersComponentStore.fetchUsers({page: pageNumber, pageSize})
   }
-
-    ngOnInit(): void {
-      this.store.pipe(select(getCurrentUsers)).subscribe((data) => {
-        if(data) {
-          this.users = data;
-        }
-      })
-
-      this.totalUsersCount$ = this.store.select(getTotalUsersCount);
-      this.currentPage$ = this.store.select(getCurrentPage);
-      this.pageSize$ = this.store.select(getPageSize);
-    }
 }

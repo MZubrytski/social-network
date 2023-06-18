@@ -1,22 +1,37 @@
-.navigation {
-  padding: 20px;
-  grid-area: navigation;
-  background-color: rgb(173, 213, 170);
+:host {
+  background-color: #f2f2f2;
 }
 
+.sidebar {
+  width: 200px;
 
-.link {
-  color: #dc3545;
-  cursor: pointer;
-  text-decoration: none;
-
-  &:hover {
-    color: #666;
+  &-nav {
+    padding: 10px;
   }
-}
 
-.active {
-  color: #333333;
-  font-weight: bold;
-  cursor: default;
+  &-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  &-item {
+    margin-bottom: 10px;
+  }
+
+  &-link {
+    display: block;
+    padding: 8px;
+    color: #333;
+    text-decoration: none;
+
+    &:hover {
+      background-color: #ddd;
+    }
+
+    &.active {
+      background-color: #555;
+      color: #fff;
+    }
+  }
 }

@@ -1,30 +1,23 @@
-<div>
-  <app-paginator
-    [totalItemsCount]="totalUsersCount$ | async"
-    [currentPage]="currentPage$ | async"
-    [pageSize]="pageSize$ | async"
-    (changePage)="onPageChanged($event)"
-  ></app-paginator>
-  <div *ngFor="let user of users">
-    <span>
-      <div>
-        <a [routerLink]="['/profile', user.id]">
-          <img [src]="user.photos.small !== null ?
-           user.photos.small :
-           'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAJZ-hjST1k8veVbSVVADwCJQXvYjyjgxypQ&usqp=CAU'"
-           class="user-photo" />
-        </a>
-      </div>
-      <div>
-        <button *ngIf="user.followed" (click)="unfollow(user.id)">Unfollow</button>
-        <button *ngIf="!user.followed" (click)="follow(user.id)">Follow</button>
-      </div>
-    </span>
-    <span>
-      <span>
-        <div>{{user.name}}</div>
-        <div>{{user.status}}</div>
-      </span>
-    </span>
+<div class="container" *ngIf="!isLoading">
+  <app-paginator [totalItemsCount]="totalUsersCount" [currentPage]="currentPage" [pageSize]="pageSize"
+    (changePage)="onPageChanged($event)"></app-paginator>
+  <h2>Users</h2>
+
+  <div *ngFor="let user of users" class="user-card">
+    <a [routerLink]="['/profile', user.id]">
+      <img [src]="user.photos.small !== null ?
+  user.photos.small :
+  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAJZ-hjST1k8veVbSVVADwCJQXvYjyjgxypQ&usqp=CAU'"
+        alt="User Photo">
+    </a>
+    <h3>{{ user.name }}</h3>
+    <p>Status: {{ user.status ? user.status : '-' }}</p>
+    <button *ngIf="user.followed" [disabled]="followingInProgress" class="follow-button"
+      (click)="unfollow(user.id)">Unfollow</button>
+    <button *ngIf="!user.followed" [disabled]="followingInProgress" class="follow-button"
+      (click)="follow(user.id)">Follow</button>
   </div>
 </div>
+<ng-container *ngIf="isLoading">
+  <app-loader></app-loader>
+</ng-container>

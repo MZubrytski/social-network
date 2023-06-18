@@ -1,2 +1,72 @@
-<app-profile-info></app-profile-info>
-<app-my-posts></app-my-posts>
+<div *ngIf="!isLoading" class="profile-page">
+  <div class="profile-header">
+    <img [src]="profile?.photos?.large !== null ?
+    profile?.photos?.large :
+    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAJZ-hjST1k8veVbSVVADwCJQXvYjyjgxypQ&usqp=CAU'" alt="User Photo" class="profile-photo">
+    <label *ngIf="isOwner" for="upload-input" class="upload-label">
+      <input id="upload-input" class="upload-input" type="file" (change)="onFileSelected($event)">
+      <span class="upload-text">Upload Photo</span>
+    </label>
+    <button *ngIf="isOwner" class="edit-profile-button" (click)="toggleEditMode()">{{editingMode ? 'Cancel' : 'Edit Profile'}}</button>
+  </div>
+  <!--NOT EDIT MODE-->
+  <div *ngIf="!editingMode" class="profile-info">
+    <h2 class="profile-fullname">{{profile?.fullName}}</h2>
+    <div class="profile-field">
+      <label class="profile-field-label">Looking for a job:</label>
+      <span class="profile-field-value">{{profile?.lookingForAJob ? "yes" : "no"}}</span>
+    </div>
+    <div class="profile-field">
+      <label class="profile-field-label">My professional skills:</label>
+      <span class="profile-field-value">{{profile?.lookingForAJobDescription}}</span>
+    </div>
+    <div class="profile-field">
+      <label class="profile-field-label">About me:</label>
+      <span class="profile-field-value">{{profile?.aboutMe}}</span>
+    </div>
+    <div class="profile-field">
+      <label class="profile-field-label">Contacts:</label>
+      <ul class="profile-contacts-list">
+        <li *ngFor="let item of profile.contacts | keyvalue" class="profile-contacts-item">
+           <a [href]="item.value" class="profile-contacts-link">
+            <span class="social-network-name">{{item.key}}:</span>
+            {{item.value ? item.value : '-'}}
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <!--NOT EDIT MODE-->
+  <div class="edit-profile-page" *ngIf="editingMode" [formGroup]="profileForm">
+    <h2>Edit profile</h2>
+    <div class="edit-profile-field">
+      <label>Full name:</label>
+      <input formControlName="fullName" placeholder="Enter full name">
+      <div *ngIf="profileForm.get('fullName').invalid && profileForm.get('fullName').touched" class="validation-error">Required filed</div>
+    </div>
+    <div class="edit-profile-field checkbox-field">
+      <label>Looking for a job:</label>
+      <input type="checkbox" formControlName="lookingForAJob">
+    </div>
+    <div class="edit-profile-field">
+      <label>My professional skills:</label>
+      <input formControlName="lookingForAJobDescription" placeholder="Enter professional skills">
+    </div>
+    <div class="edit-profile-field">
+      <label>About me:</label>
+      <textarea formControlName="aboutMe" placeholder="About me"></textarea>
+    </div>
+    <div class="edit-profile-field" formGroupName="contacts">
+      <label>Contacts:</label>
+      <div *ngFor="let item of profile.contacts | keyvalue" class="social-network-field">
+        <span class="social-network-name">{{item.key}}:</span>
+        <input [formControlName]="item.key" placeholder="Link to social network">
+        <div *ngIf="profileForm.get('contacts').get(item.key).invalid && profileForm.get('contacts').get(item.key).touched" class="validation-error">Should be link</div>
+      </div>
+    </div>
+    <button class="edit-profile-button" [disabled]="profileForm.invalid" (click)="saveChangedProfile()">Save</button>
+  </div>
+</div>
+<ng-container *ngIf="isLoading">
+  <app-loader></app-loader>
+</ng-container>

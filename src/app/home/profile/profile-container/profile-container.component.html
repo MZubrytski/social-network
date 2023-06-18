@@ -1,0 +1,7 @@
+<ng-container *ngIf="profile$ | async as profile; else loaderTemplate">
+  <app-profile [profile]="profile" [userId]="authUserId$ | async" [isLoading]="isUserProfileLoading$ | async"></app-profile>
+</ng-container>
+<ng-template #loaderTemplate>
+  <app-loader></app-loader>
+</ng-template>
+

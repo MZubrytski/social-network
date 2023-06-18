@@ -1,27 +1,24 @@
 import { createFeatureSelector, createSelector } from "@ngrx/store";
-import { AppState } from "src/app/store/model/state.model";
 import { UsersState } from "../reducers/users.reducer";
 
-export const getUsersState = ((state: AppState) => state.users);
-
-const selectCategoriesState = createFeatureSelector<UsersState>('users');
+const selectUsersState = createFeatureSelector<UsersState>('users');
 
 export const getCurrentUsers = createSelector(
-  selectCategoriesState,
+  selectUsersState,
   usersData => usersData.users
 );
 
 export const getTotalUsersCount = createSelector(
-  selectCategoriesState,
+  selectUsersState,
   usersData => usersData.totalUsersCount
 );
 
 export const getCurrentPage = createSelector(
-  selectCategoriesState,
+  selectUsersState,
   usersData => usersData.currentPage
 );
 
 export const getPageSize = createSelector(
-  selectCategoriesState,
+  selectUsersState,
   usersData => usersData.pageSize
 );

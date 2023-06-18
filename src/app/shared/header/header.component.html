@@ -1,3 +1,15 @@
 <header class="header">
-  <img src="https://seeklogo.com/images/T/twitter-icon-circle-blue-logo-94339974C6-seeklogo.com.png"> Social network
+  <div class="logo">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="logo-icon">
+      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zM7 17.42V6.58l8.31 5.42L7 17.42z"/>
+    </svg>
+    <span class="social-network-name">Samurai JS</span>
+  </div>
+  <div *ngIf="userLogin$ | async as login; else logoutTemplate" class="user-info">
+    <span class="user-login">{{login}}</span>
+    <button class="header-button" (click)="logout()">Logout</button>
+  </div>
+  <ng-template #logoutTemplate class="user-info">
+    <button *ngIf="!isLoginPage" [routerLink]="['/login']" class="header-button">Log In</button>
+  </ng-template>
 </header>

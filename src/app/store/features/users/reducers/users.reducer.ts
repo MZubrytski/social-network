@@ -5,7 +5,6 @@ import { User } from 'src/app/shared/models/User';
 
 export interface UsersState {
   users: User[];
-  isFetched: boolean;
   isLoading: boolean;
   followInProgress: boolean;
   totalUsersCount: number;
@@ -15,7 +14,6 @@ export interface UsersState {
 
 export const initialState: UsersState = {
   users: [],
-  isFetched: false,
   isLoading: false,
   followInProgress: false,
   totalUsersCount: 0,
@@ -34,7 +32,6 @@ export const reducer = createReducer(
     users,
     totalUsersCount,
     currentPage: pageNumber,
-    isFetched: true,
     isLoading: false,
   })),
   on(UserActions.follow, (state) => ({

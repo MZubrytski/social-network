@@ -1,0 +1,161 @@
+.profile {
+  &-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background-color: #f2f2f2;
+  }
+
+  &-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+
+  &-photo {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 10px;
+  }
+
+  &-info {
+    max-width: 400px;
+  }
+
+  &-fullname {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+
+  &-field {
+    margin-bottom: 10px;
+    &-label {
+      font-weight: bold;
+    }
+    &-value {
+      margin-left: 5px;
+    }
+  }
+
+  &-contacts {
+    &-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    &-item {
+      margin-bottom: 5px;
+    }
+
+    &-link {
+      color: #333;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+.edit-profile {
+  &-page {
+    width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f5f5f5;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+
+  &-field {
+    margin-bottom: 20px;
+
+    &.checkbox-field {
+      display: flex;
+    }
+  }
+
+  &-button {
+    margin-top: 10px;
+    padding: 8px 16px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #555;
+    }
+  }
+}
+
+.upload-label {
+  display: inline-block;
+  padding: 8px 16px;
+  background-color: #333;
+  color: #fff;
+  border-radius: 4px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #555;
+  }
+}
+
+.upload-input {
+  display: none;
+}
+
+.upload-text {
+  font-size: 14px;
+  margin-left: 8px;
+}
+
+.profile-contacts-link:hover {
+  text-decoration: underline;
+}
+
+label {
+  margin-right: 8px;
+}
+
+textarea {
+  width: 100%;
+  height: 50px;
+  resize: vertical;
+}
+
+.social-network-name {
+  font-weight: bold;
+  margin: 0 5px;
+}
+
+.validation-error {
+  color: #ff0000;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+button[disabled] {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+label {
+  display: block;
+}
+
+input:not([type="checkbox"]) {
+  width: 300px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}

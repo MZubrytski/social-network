@@ -9,3 +9,9 @@ export interface User {
   followed: boolean;
   unfollowed: boolean;
 }
+
+export interface AuthUser {
+  email: string;
+  id: number;
+  login: string;
+}
