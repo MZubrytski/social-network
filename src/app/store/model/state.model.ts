@@ -1,12 +1,12 @@
 import { AuthState } from "../features/auth/reducers/auth.reducer";
-import { UsersState } from "../features/users/reducers/users.reducer";
+import { ProfileState } from "../features/profile/reducers/profile.reducer";
 
 export interface AppState {
-  users: UsersState;
   authData: AuthState;
+  profile: ProfileState;
 }
 
 export const initialState = {
-  users: {},
-  authData: {}
+  authData: {},
+  profileData: {}
 };
