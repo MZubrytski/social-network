@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
-import { trackById } from '../utils';
+import { trackById } from '../../utils';
 
 @Component({
   selector: 'app-paginator',

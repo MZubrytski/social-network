@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { getAuthUser } from './store/features/auth/actions/auth.actions';
 import { isAuthUserLoad } from './store/features/auth/selectors/auth.selectors';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
