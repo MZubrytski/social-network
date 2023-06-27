@@ -1,6 +1,6 @@
 <div class="paginator">
   <button *ngIf="portionNumber > 1" (click)="decreasePortionNumber()">PREV</button>
-  <ng-container *ngFor="let page of filteredPages; let i = index">
+  <ng-container *ngFor="let page of filteredPages; let i = index; trackBy: trackById">
     <span [ngClass]="{'selected-page': currentPage === page}" class="page-number" (click)="onPageChanged(page)">
       {{page}}
     </span>

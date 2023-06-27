@@ -1,9 +1,11 @@
-import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
+import { trackById } from '../utils';
 
 @Component({
   selector: 'app-paginator',
   templateUrl: './paginator.component.html',
-  styleUrls: ['./paginator.component.scss']
+  styleUrls: ['./paginator.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PaginatorComponent implements OnChanges {
   @Input() totalItemsCount!: number;
@@ -16,7 +18,9 @@ export class PaginatorComponent implements OnChanges {
   portionCount = 0;
   portionNumber = 1;
   pages: number[] = [];
-  filteredPages: number[] = []
+  filteredPages: number[] = [];
+
+  trackById = trackById;
 
   ngOnChanges(changes: SimpleChanges) {
     if(changes['totalItemsCount']) {

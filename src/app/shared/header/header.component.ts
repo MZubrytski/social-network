@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { logout } from 'src/app/store/features/auth/actions/auth.actions';
 import { getAuthUserLogin } from 'src/app/store/features/auth/selectors/auth.selectors';
@@ -6,7 +6,8 @@ import { getAuthUserLogin } from 'src/app/store/features/auth/selectors/auth.sel
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+  styleUrls: ['./header.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HeaderComponent {
   @Input() isLoginPage!:boolean;

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { getAuthUserId } from 'src/app/store/features/auth/selectors/auth.selectors';
@@ -9,7 +9,8 @@ import { getIsUserProfileLoading, getUserProfileData } from 'src/app/store/featu
 @Component({
   selector: 'app-profile-container',
   templateUrl: './profile-container.component.html',
-  styleUrls: ['./profile-container.component.scss']
+  styleUrls: ['./profile-container.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProfileContainerComponent implements OnInit {
   profile$ = this.store.select(getUserProfileData);

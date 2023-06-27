@@ -1,32 +1,37 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { User } from 'src/app/shared/models/User';
 import { UsersComponentStore } from './users-store';
+import { trackById } from 'src/app/shared/utils';
 
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
-  styleUrls: ['./users.component.scss']
+  styleUrls: ['./users.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class UsersComponent {
-    @Input() users!: User[];
-    @Input() totalUsersCount!: number;
-    @Input() currentPage!: number;
-    @Input() pageSize!: number;
-    @Input() followingInProgress!: boolean;
-    @Input() isLoading!: boolean;
+  @Input() users!: User[];
+  @Input() totalUsersCount!: number;
+  @Input() currentPage!: number;
+  @Input() pageSize!: number;
+  @Input() followingInProgress!: boolean;
+  @Input() isLoading!: boolean;
+  @Input() authUserId!: number;
 
-    constructor(private usersComponentStore: UsersComponentStore) {}
+  trackById = trackById
 
-    unfollow(userId: number) {
-      this.usersComponentStore.unfollow(userId);
-    }
+  constructor(private usersComponentStore: UsersComponentStore) { }
 
-    follow(userId: number) {
-      this.usersComponentStore.follow(userId);
-    }
+  unfollow(userId: number) {
+    this.usersComponentStore.unfollow(userId);
+  }
 
-    onPageChanged(paginatorData: {pageNumber: number, pageSize: number}): void {
-      const {pageNumber, pageSize}  = paginatorData
-      this.usersComponentStore.fetchUsers({page: pageNumber, pageSize})
+  follow(userId: number) {
+    this.usersComponentStore.follow(userId);
+  }
+
+  onPageChanged(paginatorData: { pageNumber: number, pageSize: number }): void {
+    const { pageNumber, pageSize } = paginatorData
+    this.usersComponentStore.fetchUsers({ page: pageNumber, pageSize })
   }
 }

@@ -35,6 +35,12 @@ export class UsersComponentStore extends ComponentStore<UsersState> {
   readonly isLoading$: Observable<boolean> = this.select(state => state.isLoading);
   readonly users$: Observable<User[]> = this.select(state => state.users);
 
+  readonly resetStore = this.updater(() => {
+    return {
+      ...initialState,
+    };
+  });
+
   readonly setUsers = this.updater((state, users: User[]) => {
     return {
       ...state,
